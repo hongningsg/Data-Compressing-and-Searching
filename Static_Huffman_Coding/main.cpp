@@ -1,4 +1,4 @@
-#include "./Static_Huffman_Coding.h"
+#include "Static_Huffman_Coding.h"
 
 using namespace std;
 

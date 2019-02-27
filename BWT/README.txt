@@ -1,0 +1,10 @@
+Encoding
+Doing BWT with rotation and sorting would be too slow since the time complexity will be O(n^2), but this code implemented it in linear time with suffix array.
+Marking all characters with index and L/S(L for larger than next character while S for small). There is a coner case at beginning of string, this implemention mark beginning charactors(those marked as 0 on slides) by end charactors in string so that it become a rotation. Placing each charactor into bucket to do a raw sort. Create a Distance List to store distance of charactors away from S charactors. Then create a S List to store S charactors. Sort S charactors using Distance List, yet some charactors are not differentiable by using Distance List, after used Distance List, those could be sort by S List itself by looking at there substrings(i.e., charactors plus distance). Then use sorted S List to sort bucket to finish suffix array, finally, output charactors of previous charactor in suffix array into BWT file and index of separator into aux file.
+
+BWT search
+Read BWT file then put charactors into a bit vector(vector of bool) to indicate B and B', so memory use would be 1/8+1/8 = 1/4 of origin file.
+Create vector of select B and select B prime to speed up search then free memory of B and B'.
+Every time need S List, read BWT file to get charactors. Backward search as slide will provide -m result, LF case need to pay attention(first ==0 or trace charactor is not the same).
+-a and -n are almost the same, knowing separator position by aux file and loop single charactor backward search, use a map to inject found of not of a separator. Output in separator order for -a.
+-i is similiar to -a, loop single charactor matching to find next charactor by using BWT file. Use a map to store which keys(separator) are potential then output those are found.
